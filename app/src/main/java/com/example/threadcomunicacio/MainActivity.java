@@ -8,6 +8,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextView textView = findViewById(R.id.textView);
         Button button = findViewById(R.id.button);
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
@@ -42,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         //Background work here
                         String res;
-                        res = getDataFromUrl("https://bytes.cat");
+                        res = getDataFromUrl("https://api.myip.com");
                         Log.i("MYAPP: ",res);
-                        /*handler.post(new Runnable() {
+                        handler.post(new Runnable() {
                             @Override
                             public void run() {
-
+                                textView.append(res);
                             }
-                        });*/
+                        });
                     }
                 });
 
